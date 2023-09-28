@@ -1,0 +1,153 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: devstream-audit-service
+profiles:
+  - name: local
+    build:
+      googleCloudBuild:
+        projectId: devstream-services
+        gradleImage: gradle:7.6-jdk11-alpine
+      artifacts:
+        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-audit-service
+          jib:
+            type: gradle
+            project: service
+            args:
+              - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=cloud"
+    deploy:
+      helm:
+        releases:
+        - name: devstream-audit-service
+          chartPath: helm/audit-service
+          # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
+          setValueTemplates:
+            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+          setValues:
+            environment: local
+          valuesFiles:
+            - helm/audit-service/values.yaml
+            - helm/audit-service/local.yaml
+  - name: minikube
+    activation:
+      - kubeContext: minikube
+    build:
+      artifacts:
+        - image: audit-service
+          jib:
+            type: gradle
+            project: service
+            args:
+              - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=local"
+    manifests:
+      helm:
+        releases:
+          - name: audit-service
+            chartPath: helm/audit-service
+            valuesFiles:
+              - helm/audit-service/values.yaml
+              - helm/audit-service/local.yaml
+            setValues:
+              environment: local
+              net.readinessProbe.initialDelaySeconds: 30
+              pullPolicy: IfNotPresent
+              postgres.enabled: "true"
+            setValueTemplates:
+              image.repository: audit-service
+              image.tag: audit-service
+
+    deploy:
+      statusCheckDeadlineSeconds: 60
+      tolerateFailuresUntilDeadline: true
+      helm: {}
+
+    portForward:
+      - resourceType: service
+        resourceName: audit-service
+        namespace: devstream
+        port: 80
+        localPort: 8080
+      - resourceType: service
+        resourceName: audit-service-postgres
+        namespace: devstream
+        port: 5432
+        localPort: 5438
+  - name: dev
+    build:
+      googleCloudBuild:
+        projectId: devstream-services
+        gradleImage: gradle:7.6-jdk11-alpine
+      artifacts:
+        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-audit-service
+          jib:
+            type: gradle
+            project: service
+            args:
+              - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=cloud"
+    deploy:
+      helm:
+        releases:
+        - name: devstream-audit-service
+          chartPath: helm/audit-service
+          # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
+          setValueTemplates:
+            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+          setValues:
+            environment: dev
+          valuesFiles:
+            - helm/audit-service/values.yaml
+            - helm/audit-service/dev.yaml
+  - name: staging
+    build:
+      googleCloudBuild:
+        projectId: devstream-services
+        gradleImage: gradle:7.6-jdk11-alpine
+      artifacts:
+        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-audit-service
+          jib:
+            type: gradle
+            project: service
+            args:
+              - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=cloud"
+    deploy:
+      helm:
+        releases:
+        - name: devstream-audit-service
+          chartPath: helm/audit-service
+          # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
+          setValueTemplates:
+            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+          setValues:
+            environment: staging
+          valuesFiles:
+            - helm/audit-service/values.yaml
+            - helm/audit-service/staging.yaml
+  - name: prod
+    build:
+      googleCloudBuild:
+        projectId: devstream-services
+        gradleImage: gradle:7.6-jdk11-alpine
+      artifacts:
+        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-audit-service
+          jib:
+            type: gradle
+            project: service
+            args:
+              - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=cloud"
+    deploy:
+      helm:
+        releases:
+        - name: devstream-audit-service
+          chartPath: helm/audit-service
+          # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
+          setValueTemplates:
+            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+          setValues:
+            environment: prod
+          valuesFiles:
+            - helm/audit-service/values.yaml
+            - helm/audit-service/prod.yaml

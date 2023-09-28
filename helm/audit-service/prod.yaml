@@ -1,0 +1,22 @@
+environment: "prod"
+serviceAccountName: devstream-sa
+createIngress: false
+
+net:
+  host: "api-prod.devstream.dsgov.demo.nuvalence.io"
+
+env:
+  ALLOWED_ORIGINS: "http://localhost:4200, http://localhost:4201, https://api-prod.devstream.dsgov.demo.nuvalence.io, https://agency-prod.devstream.dsgov.demo.nuvalence.io, https://public-prod.devstream.dsgov.demo.nuvalence.io"
+  CERBOS_URI: "127.0.0.1:3592"
+  DB_CONNECTION_URL: "jdbc:postgresql://127.0.0.1:5432/devstream-prod-audit-service-db"
+  DB_USERNAME: "${sm://projects/devstream-prod/secrets/devstream-prod-db-user/versions/latest}"
+  DB_PASSWORD: "${sm://projects/devstream-prod/secrets/devstream-prod-db-pass/versions/latest}"
+  GCP_PROJECT_ID: "devstream-prod"
+  SELF_SIGN_PUBLIC_KEY: "${sm://projects/devstream-prod/secrets/devstream-self-signed-token-public-key/versions/latest}"
+  SELF_SIGN_PRIVATE_KEY: "${sm://projects/devstream-prod/secrets/devstream-self-signed-token-private-key/versions/latest}"
+  ENABLE_PUB_SUB: "true"
+  PUB_SUB_TOPIC: "AUDIT_EVENTS"
+  PUB_SUB_TOPIC_SUBSCRIPTION: "AUDIT_EVENTS_SUBSCRIPTION"
+  TOKEN_PRIVATE_KEY_SECRET: "devstream-self-signed-token-private-key"
+  TOKEN_ISSUER: "devstream"
+  TOKEN_PRIVATE_KEY_VERSION: "latest"
