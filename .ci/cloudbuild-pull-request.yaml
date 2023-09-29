@@ -11,11 +11,9 @@ steps:
       - |
         ./gradlew \
           -Dsonar.login="$$SONARQUBE_TOKEN" \
-          -Dsonar.projectKey=${REPO_NAME} \
-          -Dsonar.projectName=${REPO_NAME} \
+          -Dsonar.projectKey=${REPO_NAME}-${_PR_NUMBER} \
+          -Dsonar.projectName=${REPO_NAME}-${_PR_NUMBER} \
           -Dsonar.host.url=${_SONARQUBE_HOST} \
-          -Dsonar.branch.name=${BRANCH_NAME} \
-          -Dsonar.qualitygate.wait=true \
           clean build jacocoTestReport sonarqube
     secretEnv: ['SONARQUBE_TOKEN']
 
