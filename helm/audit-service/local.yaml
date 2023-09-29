@@ -21,9 +21,9 @@ env:
   DB_CONNECTION_URL: "jdbc:postgresql://audit-service-postgres:5432/local-audit-service-db"
   DB_USERNAME: "root"
   DB_PASSWORD: "root"
-  GCP_PROJECT_ID: "devstream-dev"
-  SELF_SIGN_PUBLIC_KEY: "${sm://projects/devstream-dev/secrets/devstream-self-signed-token-public-key/versions/latest}"
-  SELF_SIGN_PRIVATE_KEY: "${sm://projects/devstream-dev/secrets/devstream-self-signed-token-private-key/versions/latest}"
+  GCP_PROJECT_ID: "devstream-dev-2e76"
+  SELF_SIGN_PUBLIC_KEY: "${sm://projects/devstream-dev-2e76/secrets/devstream-self-signed-token-public-key/versions/latest}"
+  SELF_SIGN_PRIVATE_KEY: "${sm://projects/devstream-dev-2e76/secrets/devstream-self-signed-token-private-key/versions/latest}"
   ENABLE_PUB_SUB: false
   PUB_SUB_TOPIC: topic-audit-events
   PUB_SUB_TOPIC_SUBSCRIPTION: sub-audit-events
