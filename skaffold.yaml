@@ -6,10 +6,10 @@ profiles:
   - name: local
     build:
       googleCloudBuild:
-        projectId: devstream-services
-        gradleImage: gradle:7.6-jdk11-alpine
+        projectId: devstream-shared-services-4179
+        gradleImage: gradle:8.2.1-jdk17-alpine
       artifacts:
-        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-audit-service
+        - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-audit-service
           jib:
             type: gradle
             project: service
@@ -22,8 +22,8 @@ profiles:
           chartPath: helm/audit-service
           # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
           setValueTemplates:
-            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
-            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}"
+            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}"
           setValues:
             environment: local
           valuesFiles:
@@ -76,10 +76,10 @@ profiles:
   - name: dev
     build:
       googleCloudBuild:
-        projectId: devstream-services
-        gradleImage: gradle:7.6-jdk11-alpine
+        projectId: devstream-shared-services-4179
+        gradleImage: gradle:8.2.1-jdk17-alpine
       artifacts:
-        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-audit-service
+        - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-audit-service
           jib:
             type: gradle
             project: service
@@ -92,8 +92,8 @@ profiles:
           chartPath: helm/audit-service
           # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
           setValueTemplates:
-            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
-            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}"
+            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}"
           setValues:
             environment: dev
           valuesFiles:
@@ -102,10 +102,10 @@ profiles:
   - name: staging
     build:
       googleCloudBuild:
-        projectId: devstream-services
-        gradleImage: gradle:7.6-jdk11-alpine
+        projectId: devstream-shared-services-4179
+        gradleImage: gradle:8.2.1-jdk17-alpine
       artifacts:
-        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-audit-service
+        - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-audit-service
           jib:
             type: gradle
             project: service
@@ -118,8 +118,8 @@ profiles:
           chartPath: helm/audit-service
           # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
           setValueTemplates:
-            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
-            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}"
+            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}"
           setValues:
             environment: staging
           valuesFiles:
@@ -128,10 +128,10 @@ profiles:
   - name: prod
     build:
       googleCloudBuild:
-        projectId: devstream-services
-        gradleImage: gradle:7.6-jdk11-alpine
+        projectId: devstream-shared-services-4179
+        gradleImage: gradle:8.2.1-jdk17-alpine
       artifacts:
-        - image: us-east4-docker.pkg.dev/devstream-services/application/devstream-audit-service
+        - image: us-east4-docker.pkg.dev/devstream-shared-services-4179/application/devstream-audit-service
           jib:
             type: gradle
             project: service
@@ -144,8 +144,8 @@ profiles:
           chartPath: helm/audit-service
           # Ref: https://skaffold.dev/docs/deployers/helm/#image-configuration
           setValueTemplates:
-            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
-            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_services_application_devstream_audit_service}}"
+            image.repository: "{{.IMAGE_REPO_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}"
+            image.tag: "{{.IMAGE_TAG_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}@{{.IMAGE_DIGEST_us_east4_docker_pkg_dev_devstream_shared_services_4179_application_devstream_audit_service}}"
           setValues:
             environment: prod
           valuesFiles:
